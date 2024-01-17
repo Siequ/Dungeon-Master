@@ -7,9 +7,12 @@ Console.ResetColor();
 ConsoleKeyInfo userKey;
 int choosedClassOption = 1;
 bool isSelected = false;
+(int leftPosition, int topPosition) = Console.GetCursorPosition();
+
 
 while (!isSelected)
 {
+    Console.SetCursorPosition(leftPosition, topPosition);
     Console.WriteLine("Rogue");
     Console.WriteLine("Barbarian");
     Console.WriteLine("Mage");
