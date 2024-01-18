@@ -8,25 +8,25 @@ ConsoleKeyInfo userKey;
 int choosedClassOption = 1;
 bool isSelected = false;
 (int leftPosition, int topPosition) = Console.GetCursorPosition();
-
+string currentOption = "*  ";
 
 while (!isSelected)
 {
     Console.SetCursorPosition(leftPosition, topPosition);
-    Console.WriteLine("Rogue");
-    Console.WriteLine("Barbarian");
-    Console.WriteLine("Mage");
+    Console.WriteLine($"{(choosedClassOption == 1 ? currentOption : "   ")}Rogue");
+    Console.WriteLine($"{(choosedClassOption == 2 ? currentOption : "   ")}Barbarian");
+    Console.WriteLine($"{(choosedClassOption == 3 ? currentOption : "   ")}Mage");
 
     userKey = Console.ReadKey(true);
 
     switch (userKey.Key)
     {
         case ConsoleKey.DownArrow:
-        choosedClassOption++;
+        choosedClassOption = (choosedClassOption == 3 ? 3 : choosedClassOption + 1);
         break;
 
         case ConsoleKey.UpArrow:
-            choosedClassOption--;
+            choosedClassOption = (choosedClassOption == 1 ? 1 : choosedClassOption - 1 );
         break;
 
         case ConsoleKey.Enter:
@@ -38,5 +38,13 @@ while (!isSelected)
     
 }
 
-Console.WriteLine($"You selected {choosedClassOption} ");
+if(choosedClassOption == 1){
+Console.WriteLine($"You selected Rogue ");
+}
+else if(choosedClassOption == 2 ){
+    Console.WriteLine($"You selected Barbarian ");
+}
+else {
+    Console.WriteLine($"You selected Mage ");
+}
 Console.ReadLine();
