@@ -1,4 +1,6 @@
-﻿Console.ForegroundColor = ConsoleColor.Magenta;
+﻿using System.Security.Cryptography.X509Certificates;
+
+Console.ForegroundColor = ConsoleColor.Magenta;
 Console.WriteLine("Welcome to the game!");
 Console.ForegroundColor = ConsoleColor.Cyan;
 Console.WriteLine("\nUse up and down arrow keys to choose your class");
@@ -56,24 +58,33 @@ else {
 }
 
     int ratBossLife = 300;
-    Random ratBossDmg = new Random();
-    int ratAttack1 = ratBossDmg.Next(50,60);
-    int ratAttack2 = ratBossDmg.Next(50,60);
+    Random randomDmg = new Random();
+
+    
 
     Console.WriteLine("\nYou've entered small dungeon, after exploring it, a big, mutated rat apperead - it seems like you have to fight for your life! \n ");
     
     do{
 
-    Random heroDmg = new Random();
-    int heroAttack = heroDmg.Next(20,30);
-    
-    Console.WriteLine("attack!");
-    ratBossLife= ratBossLife-heroAttack;
+    Random playerDmg = new Random();
+    int playerAttack = randomDmg.Next(40,55);
+    int ratAttack = randomDmg.Next(15,20);
     Console.Clear();
+    
+    
     if(ratBossLife>0){
-    Console.WriteLine("\n Rat's hp:"+ratBossLife);
+        Console.WriteLine("attack!");
+    Console.WriteLine($"\n Rat's hp:{ratBossLife} Your hp: {playerHealth}");
     }
+   
+    
     Console.ReadLine();
+    ratBossLife= ratBossLife-playerAttack;
+    playerHealth= playerHealth-ratAttack;
+     if(ratBossLife<0){
+        Console.WriteLine("You killed a rat!");
+        
+    }
     }while(ratBossLife>=0); 
 
 
