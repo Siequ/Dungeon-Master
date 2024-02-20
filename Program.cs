@@ -37,14 +37,20 @@ while (!isSelected)
     }
     
 }
-
+int playerHealth = 0;
+Console.Clear();
 if(choosedClassOption == 1){
-Console.WriteLine($"You selected Rogue ");
+Console.WriteLine($"You selected Rogue, you have chance to dodge enemy's attack");
+playerHealth = playerHealth+450;
 }
 else if(choosedClassOption == 2 ){
-    Console.WriteLine($"You selected Barbarian ");
+    Console.WriteLine($"You selected Barbarian, you are able to attack twice");
+    playerHealth = playerHealth+600;
 }
 else {
-    Console.WriteLine($"You selected Mage ");
+    Console.WriteLine($"You selected Mage, you are able to cast a spell ");
+    playerHealth = playerHealth+350;
 }
+
+
 Console.ReadLine();
