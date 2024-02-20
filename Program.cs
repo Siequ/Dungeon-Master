@@ -51,12 +51,30 @@ else if(choosedClassOption == 2 ){
 else {
     playerHealth = playerHealth+350;
     playerMana = playerMana+60;
-    Console.WriteLine($"You selected Mage, you are able to cast a spell, your health is: {playerHealth} and your mana: {playerMana} ");
+    Console.WriteLine($"You selected Mage, you are able to cast a huge spell, your health is: {playerHealth} and your mana: {playerMana} ");
     
 }
 
+    int ratBossLife = 300;
+    Random ratBossDmg = new Random();
+    int ratAttack1 = ratBossDmg.Next(50,60);
+    int ratAttack2 = ratBossDmg.Next(50,60);
 
+    Console.WriteLine("\nYou've entered small dungeon, after exploring it, a big, mutated rat apperead - it seems like you have to fight for your life! \n ");
+    
+    do{
 
+    Random heroDmg = new Random();
+    int heroAttack = heroDmg.Next(20,30);
+    
+    Console.WriteLine("attack!");
+    ratBossLife= ratBossLife-heroAttack;
+    Console.Clear();
+    if(ratBossLife>0){
+    Console.WriteLine("\n Rat's hp:"+ratBossLife);
+    }
+    Console.ReadLine();
+    }while(ratBossLife>=0); 
 
 
 Console.ReadLine();
