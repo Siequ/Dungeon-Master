@@ -39,42 +39,65 @@ while (!isSelected)
     }
     
 }
+string specialAbility=" ";
 int playerHealth = 0;
 int playerMana = 0;
+int playerAttack = 0;
+Random randomDmg = new Random();
+
 Console.Clear();
 if(choosedClassOption == 1){
+specialAbility="Dodge";
+//playerAttack = randomDmg.Next(20,28);
 playerHealth = playerHealth+450;
-Console.WriteLine($"You selected Rogue, you have chance to dodge enemy's attack, your health is: {playerHealth}");
+Console.WriteLine($"You selected Rogue, your health is: {playerHealth} and your special ability is {specialAbility}");
 }
 else if(choosedClassOption == 2 ){
+    specialAbility="Double Attack";
+    //playerAttack = randomDmg.Next(30,40);
     playerHealth = playerHealth+600;
-    Console.WriteLine($"You selected Barbarian, you are able to attack twice, your health is: {playerHealth}");
+    Console.WriteLine($"You selected Barbarian, your health is: {playerHealth} and your special ability is {specialAbility}");
 }
 else {
+    specialAbility="Cast";
     playerHealth = playerHealth+350;
     playerMana = playerMana+60;
-    Console.WriteLine($"You selected Mage, you are able to cast a huge spell, your health is: {playerHealth} and your mana: {playerMana} ");
-    
+    //playerAttack = randomDmg.Next(18,25);
+    Console.WriteLine($"You selected Mage, your health is: {playerHealth}, your mana: {playerMana} and your special ability is {specialAbility}");
 }
 
     int ratBossLife = 300;
-    Random randomDmg = new Random();
-
+        
     
 
     Console.WriteLine("\nYou've entered small dungeon, after exploring it, a big, mutated rat apperead - it seems like you have to fight for your life! \n ");
     
+    Console.ReadLine();
     do{
 
-    Random playerDmg = new Random();
-    int playerAttack = randomDmg.Next(40,55);
+    switch(choosedClassOption){
+
+        case 1:
+        playerAttack = randomDmg.Next(20,28);
+        break;
+
+        case 2:
+        playerAttack = randomDmg.Next(30,40);
+        break;
+
+        case 3:
+        playerAttack = randomDmg.Next(18,25);
+        break;
+
+    }
+
     int ratAttack = randomDmg.Next(15,20);
     Console.Clear();
     
     
     if(ratBossLife>0){
         Console.WriteLine("attack!");
-    Console.WriteLine($"\n Rat's hp:{ratBossLife} Your hp: {playerHealth}");
+        Console.WriteLine("\n Rat's hp:"+ratBossLife+" Your hp: "+playerHealth+(choosedClassOption==3 ? "Your Mana: "+playerMana : ""));
     }
    
     
