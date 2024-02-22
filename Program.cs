@@ -39,10 +39,11 @@ while (!isSelected)
     }
     
 }
-string specialAbility=" ";
+string specialAbility="";
 int playerHealth = 0;
 int playerMana = 0;
-int playerAttack = 0;
+int playerBaseDmg = 0;
+string? playerAttack="";
 Random randomDmg = new Random();
 
 Console.Clear();
@@ -65,53 +66,65 @@ else {
     
     Console.WriteLine($"You selected Mage, your health is: {playerHealth}, your mana: {playerMana} and your special ability is {specialAbility}");
 }
-
+    int ratAttack;
     int ratBossLife = 300;
         
-    
-
     Console.WriteLine("\nYou've entered small dungeon, after exploring it, a big, mutated rat apperead - it seems like you have to fight for your life! \n ");
     
     Console.ReadLine();
+    Console.Clear();
     do{
 
     switch(choosedClassOption){
 
         case 1:
-        playerAttack = randomDmg.Next(20,28);
+        playerBaseDmg = randomDmg.Next(20,28);
         break;
 
         case 2:
-        playerAttack = randomDmg.Next(30,40);
+        playerBaseDmg = randomDmg.Next(30,40);
         break;
 
         case 3:
-        playerAttack = randomDmg.Next(18,25);
+        playerBaseDmg = randomDmg.Next(18,25);
         break;
 
     }
 
-    int ratAttack = randomDmg.Next(15,20);
-    Console.Clear();
+    ratAttack = randomDmg.Next(15,20);
     
     
-    if(ratBossLife>=0){
-        Console.WriteLine("attack!");
+    
+    if(ratBossLife>0){
+        Console.WriteLine("\ntype 'attack' to hit with basic attack/spell "+(choosedClassOption==2 || choosedClassOption==3 ? "or type '"+specialAbility.ToLower()+"' to use your ability" : ""));
         Console.WriteLine("\n Rat's hp:"+ratBossLife+" Your hp: "+playerHealth+(choosedClassOption==3 ? "Your Mana: "+playerMana : ""));
-        Console.ReadLine();
+        playerAttack = Console.ReadLine()?.ToLower().Trim();
+
+        
+
+        if(playerAttack=="attack"){
+            Console.Clear();
+            
+    ratBossLife= ratBossLife-playerBaseDmg;
+    playerHealth= playerHealth-ratAttack;
+
+    Console.WriteLine($"\nYou dealt {playerBaseDmg} damage to the rat, you recived {ratAttack} damage");
+
+    }
+    
     }
    
     
-    
-    ratBossLife= ratBossLife-playerAttack;
-    playerHealth= playerHealth-ratAttack;
+   
+
      if(ratBossLife<=0){
+        Console.Clear();
         Console.WriteLine("You killed a rat!");
         
     }
      else if(playerHealth<0){
         Console.WriteLine("You died!");
-        
+    
     }
     }while(ratBossLife>=0 && playerHealth>=0); 
 
