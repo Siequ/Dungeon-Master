@@ -44,6 +44,9 @@ int playerHealth = 0;
 int playerMana = 0;
 int playerBaseDmg = 0;
 string? playerAttack="";
+int specialLimit = 1;
+int castDmg = 60;
+
 Random randomDmg = new Random();
 
 Console.Clear();
@@ -94,9 +97,9 @@ else {
     ratAttack = randomDmg.Next(15,20);
     
     
-    
+    specialAbility = specialAbility.ToLower();
     if(ratBossLife>0){
-        Console.WriteLine("\ntype 'attack' to hit with basic attack/spell "+(choosedClassOption==2 || choosedClassOption==3 ? "or type '"+specialAbility.ToLower()+"' to use your ability" : ""));
+        Console.WriteLine("\ntype 'attack' to hit with basic attack/spell "+(choosedClassOption==2 && specialLimit>0 || choosedClassOption==3 && specialLimit>0 ? "or type '"+specialAbility+"' to use your ability" : ""));
         Console.WriteLine("\n Rat's hp:"+ratBossLife+" Your hp: "+playerHealth+(choosedClassOption==3 ? "Your Mana: "+playerMana : ""));
         playerAttack = Console.ReadLine()?.ToLower().Trim();
 
@@ -111,7 +114,15 @@ else {
     Console.WriteLine($"\nYou dealt {playerBaseDmg} damage to the rat, you recived {ratAttack} damage");
 
     }
+    else if(playerAttack=="double attack"){
+        Console.Clear();
+        ratBossLife = ratBossLife-(playerBaseDmg+playerBaseDmg);
+        playerHealth= playerHealth-ratAttack;
+        Console.WriteLine($"\nYou dealt {playerBaseDmg*2} damage (double attack!) to the rat, you recived {ratAttack} damage");
+        specialLimit-=1;
+    }
     
+
     }
    
     
