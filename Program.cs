@@ -47,7 +47,9 @@ string? playerAttack="";
 int specialLimit = 1;
 int castDmg = 60;
 
+
 Random randomDmg = new Random();
+Random luckyRandom = new Random();
 
 Console.Clear();
 if(choosedClassOption == 1){
@@ -106,27 +108,32 @@ else {
         
 
         if(playerAttack=="attack"){
+            ;
             Console.Clear();
-            
-    ratBossLife= ratBossLife-playerBaseDmg;
-    playerHealth= playerHealth-ratAttack;
+            if(specialAbility=="dodge" && luckyRandom.Next(0,100)>=50){
+            ratBossLife= ratBossLife-playerBaseDmg;
+            Console.WriteLine($"\nYou have dealt {playerBaseDmg} damage to the rat, you have dodged the rat attack and recived 0 damage");
+        }
+        else {
+            ratBossLife= ratBossLife-playerBaseDmg;
+            playerHealth= playerHealth-ratAttack;
 
-    Console.WriteLine($"\nYou have dealt {playerBaseDmg} damage to the rat, you have recived {ratAttack} damage");
-
+            Console.WriteLine($"\nYou have dealt {playerBaseDmg} damage to the rat, you have recived {ratAttack} damage from rat");
     }
-    else if(playerAttack=="double attack"){
+    }
+    else if(playerAttack=="double attack" && specialLimit>0){
         Console.Clear();
         ratBossLife = ratBossLife-(playerBaseDmg+playerBaseDmg);
         playerHealth= playerHealth-ratAttack;
-        Console.WriteLine($"\nYou have dealt {playerBaseDmg*2} damage (double attack!) to the rat, you have recived {ratAttack} damage");
+        Console.WriteLine($"\nYou have dealt {playerBaseDmg*2} damage (double attack!) to the rat, you have recived {ratAttack} damage from rat");
         specialLimit-=1;
     }
-    else if(playerAttack=="cast"){
+    else if(playerAttack=="cast" && playerMana>=30){
         Console.Clear();
         ratBossLife = ratBossLife-castDmg;
         playerHealth= playerHealth-ratAttack;
         playerMana = playerMana-30;
-        Console.WriteLine($"\nYou have dealt {castDmg} damage (casted a big fireball!) to the rat, you have recived {ratAttack} damage");
+        Console.WriteLine($"\nYou have dealt {castDmg} damage (casted a big fireball!) to the rat, you have recived {ratAttack} damage from rat");
     }
 
     }
