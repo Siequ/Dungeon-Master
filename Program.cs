@@ -75,8 +75,8 @@ else {
     int ratBossLife = 300;
         
     Console.WriteLine("\nYou've entered small dungeon, after exploring it, a big, mutated rat apperead - it seems like you have to fight for your life! \n ");
-    
-    Console.ReadLine();
+    Console.WriteLine("\n How many rounds would you like to try playing? (Range 1-5) ");
+    int.TryParse(Console.ReadLine(), out int roundsNumber);
     Console.Clear();
     do{
 
@@ -96,7 +96,7 @@ else {
 
     }
 
-    ratAttack = randomDmg.Next(15,20);
+    ratAttack = randomDmg.Next(15,25);
     
     
     specialAbility = specialAbility.ToLower();
