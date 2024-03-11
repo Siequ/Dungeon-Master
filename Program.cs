@@ -110,7 +110,7 @@ else {
         if(playerAttack=="attack"){
             ;
             Console.Clear();
-            if(specialAbility=="dodge" && luckyRandom.Next(0,100)>=50){
+            if(specialAbility=="dodge" && luckyRandom.Next(0,100)>=75){
             ratBossLife= ratBossLife-playerBaseDmg;
             Console.WriteLine($"\nYou have dealt {playerBaseDmg} damage to the rat, you have dodged the rat attack and recived 0 damage");
         }
