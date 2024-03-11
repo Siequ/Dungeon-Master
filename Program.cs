@@ -48,6 +48,8 @@ int specialLimit = 1;
 int castDmg = 60;
 
 
+
+
 Random randomDmg = new Random();
 Random luckyRandom = new Random();
 
@@ -72,12 +74,22 @@ else {
     Console.WriteLine($"You selected Mage, your health is: {playerHealth}, your mana: {playerMana} and your special ability is {specialAbility}");
 }
     int ratAttack;
-    int ratBossLife = 300;
+    int ratBossLife=300;
         
     Console.WriteLine("\nYou've entered small dungeon, after exploring it, a big, mutated rat apperead - it seems like you have to fight for your life! \n ");
-    Console.WriteLine("\n How many rounds would you like to try playing? (Range 1-5) ");
+    Console.WriteLine("\n How many rounds would you like to try playing? (Range 1-3) ");
     int.TryParse(Console.ReadLine(), out int roundsNumber);
+  
+    if(roundsNumber<=0 || roundsNumber>3){
+
+        
+        roundsNumber=1;
+
+    }
+    int expectedRounds = roundsNumber;
     Console.Clear();
+    do{
+
     do{
 
     switch(choosedClassOption){
@@ -97,10 +109,10 @@ else {
     }
 
     ratAttack = randomDmg.Next(15,25);
-    
-    
     specialAbility = specialAbility.ToLower();
-    if(ratBossLife>0){
+   
+        
+    if(ratBossLife>0 && playerHealth>0){
         Console.WriteLine("\ntype 'attack' to hit with basic attack/spell "+(choosedClassOption==2 && specialLimit>0 || choosedClassOption==3 && playerMana>0 ? "or type '"+specialAbility+"' to use your ability" : ""));
         Console.WriteLine("\n Rat's hp:"+ratBossLife+" Your hp: "+playerHealth+(choosedClassOption==3 ? "Your Mana: "+playerMana : ""));
         playerAttack = Console.ReadLine()?.ToLower().Trim();
@@ -108,7 +120,6 @@ else {
         
 
         if(playerAttack=="attack"){
-            ;
             Console.Clear();
             if(specialAbility=="dodge" && luckyRandom.Next(0,100)>=75){
             ratBossLife= ratBossLife-playerBaseDmg;
@@ -145,12 +156,24 @@ else {
         Console.Clear();
         Console.WriteLine("You killed a rat!");
         
+        roundsNumber--;
+        if(roundsNumber>0){
+        ratBossLife=300;
+        Console.WriteLine($"You choosed {expectedRounds} rounds, {roundsNumber} left, another rat appears!");
+        }
+        else if(roundsNumber==0){
+            Console.WriteLine("Congratulations! You successfully cleared the dungeon!");
+        }
     }
      else if(playerHealth<0){
         Console.WriteLine("You died!");
-    
+        ratBossLife=0;
+        roundsNumber=0;
     }
-    }while(ratBossLife>=0 && playerHealth>=0); 
-
+    
+    }while(playerHealth>=0 && ratBossLife>0);
+    
+    }while(playerHealth>=0 && roundsNumber>0);
+    
 
 Console.ReadLine();
